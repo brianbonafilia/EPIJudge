@@ -1,16 +1,16 @@
 from test_framework import generic_test
 
 
-def closest_int_same_bit_count2(x):
+def closest_int_same_bit_count(x):
     # TODO - you fill in here.
-    UNSIGNED_INT = 63
+    UNSIGNED_INT = 64
     for i in range(0, UNSIGNED_INT):
         if(x >> i) & 1 != (x >> i + 1) & 1:
             x ^= (1 << i) | (1 << i + 1)
             return x
     return
 
-def closest_int_same_bit_count(x):
+def closest_int_first_attempt(x):
     current_bit = 1
     if x & 1:
         current_bit <<= 1
