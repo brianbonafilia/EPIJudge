@@ -1,4 +1,5 @@
 import functools
+import math
 import random
 
 from test_framework import generic_test
@@ -13,7 +14,20 @@ def zero_one_random():
 
 def uniform_random(lower_bound, upper_bound):
     # TODO - you fill in here.
-    return 0
+    def make_random_binary(num_bits):
+        result = 0
+        mask = 1
+        for i in range(0, num_bits):
+            if zero_one_random():
+                result |= mask
+            mask <<= 1
+        return result
+    value = upper_bound - lower_bound
+    num_bits = math.ceil(math.log2(value + 1))
+    result = make_random_binary(num_bits)
+    while result > value:
+        result = make_random_binary(num_bits)
+    return result + lower_bound
 
 
 @enable_executor_hook

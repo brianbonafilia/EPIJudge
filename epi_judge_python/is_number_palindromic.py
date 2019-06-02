@@ -1,5 +1,6 @@
-from test_framework import generic_test
 import math
+
+from test_framework import generic_test
 
 
 def is_palindrome_number(x):
