@@ -7,6 +7,10 @@ def plus_one(A):
             break
         A[i] = 0
     if A[0] == 0:
+        # this is the clever part here in order to avoid completely copying 
+        # the array we can change the first bit to a one and append 0 to the 
+        # end.  This would break if we were given bad data and and list like
+        # [0,3,4] was given however
         A[0] = 1
         A.append(0)
     return A
