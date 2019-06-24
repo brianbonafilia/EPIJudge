@@ -5,13 +5,14 @@ def apply_permutation(perm, A):
     # TODO - you fill in here.
     i = 0
     while i < len(A):
-        if perm[i] != -1:
+        if perm[i] >= 0:
             perm_val = perm[i]
             A[i], A[perm_val] = A[perm_val], A[i]
             perm[i] = perm[perm_val]
-            perm[perm_val] = -1
+            perm[perm_val] -= len(perm)
         else:
             i += 1
+    perm[:] = [val + len(perm) for val in perm]
     return
 
 
