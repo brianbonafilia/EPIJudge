@@ -1,4 +1,5 @@
 import functools
+import random
 
 from test_framework import generic_test
 from test_framework.random_sequence_checker import (
@@ -10,7 +11,17 @@ from test_framework.test_utils import enable_executor_hook
 # Assumption: there are at least k elements in the stream.
 def online_random_sample(stream, k):
     # TODO - you fill in here.
-    return []
+    answer = []
+    i = 0
+    for number in stream:
+        if len(answer) < k:
+            answer.append(number)
+        else:
+            index = random.randint(0,i)
+            if  index < k:
+                answer[index] = number
+        i += 1
+    return answer
 
 
 @enable_executor_hook

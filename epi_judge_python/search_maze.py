@@ -13,7 +13,28 @@ Coordinate = collections.namedtuple('Coordinate', ('x', 'y'))
 
 def search_maze(maze, s, e):
     # TODO - you fill in here.
-    return []
+    def search_helper(cur):
+
+        if not (0 <= cur.x < len(maze) and 0 <= cur.y < len(maze[0])
+                and maze[cur.x][cur.y] == WHITE):
+            return False
+        maze[cur.x][cur.y] = BLACK
+        path.append(cur)
+        if cur == e:
+            return True
+        if(
+            any(
+                map(search_helper,
+                    map(Coordinate, (cur.x + 1, cur.x - 1, cur.x, cur.x),
+                        (cur.y, cur.y, cur.y + 1, cur.y - 1)
+                        )))):
+            return True
+        del path[-1]
+        return False
+
+    path = []
+    search_helper(s)
+    return path
 
 
 def path_element_is_feasible(maze, prev, cur):
@@ -21,9 +42,9 @@ def path_element_is_feasible(maze, prev, cur):
             (0 <= cur.y < len(maze[cur.x])) and maze[cur.x][cur.y] == WHITE):
         return False
     return cur == (prev.x + 1, prev.y) or \
-           cur == (prev.x - 1, prev.y) or \
-           cur == (prev.x, prev.y + 1) or \
-           cur == (prev.x, prev.y - 1)
+    cur == (prev.x - 1, prev.y) or \
+    cur == (prev.x, prev.y + 1) or \
+    cur == (prev.x, prev.y - 1)
 
 
 @enable_executor_hook
